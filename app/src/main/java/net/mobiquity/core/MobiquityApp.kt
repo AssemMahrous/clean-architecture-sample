@@ -1,14 +1,24 @@
 package net.mobiquity.core
 
+import android.app.Activity
 import android.app.Application
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
 import net.mobiquity.BuildConfig
+import net.mobiquity.core.di.AppInjector
 import net.mobiquity.core.utils.ReleaseTree
 import timber.log.Timber
+import javax.inject.Inject
 
-class MobiquityApp : Application() {
+class MobiquityApp : Application(), HasActivityInjector {
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+
+    override fun activityInjector() = dispatchingAndroidInjector
+
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) {
@@ -24,5 +34,7 @@ class MobiquityApp : Application() {
         }
 
         Fresco.initialize(this)
+
+        AppInjector.init(this)
     }
 }

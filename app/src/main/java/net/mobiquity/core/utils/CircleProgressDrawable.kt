@@ -7,11 +7,11 @@ import com.facebook.drawee.drawable.ProgressBarDrawable
 class CircleProgressDrawable : ProgressBarDrawable() {
 
     private val mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val MAX_LEVEL = 10000
+    private val maxLevel = 10000
     private var mBarWidth = 20
     private var mLevel = 0
     private var mHideWhenZero = false
-    private var _Radius = 50
+    private var _radius = 50
 
     init {
         mPaint.style = Paint.Style.STROKE
@@ -19,7 +19,7 @@ class CircleProgressDrawable : ProgressBarDrawable() {
     }
 
     override fun setRadius(radius: Int) {
-        this._Radius = radius
+        this._radius = radius
     }
 
     /**
@@ -116,23 +116,23 @@ class CircleProgressDrawable : ProgressBarDrawable() {
 
         val bounds = bounds
         // find center point
-        val xpos = bounds.left + bounds.width() / 2
-        val ypos = bounds.bottom - bounds.height() / 2
+        val xPosition = bounds.left + bounds.width() / 2
+        val yPosition = bounds.bottom - bounds.height() / 2
         val rectF = RectF(
-            (xpos - _Radius).toFloat(),
-            (ypos - _Radius).toFloat(),
-            (xpos + _Radius).toFloat(),
-            (ypos + _Radius).toFloat()
+            (xPosition - _radius).toFloat(),
+            (yPosition - _radius).toFloat(),
+            (xPosition + _radius).toFloat(),
+            (yPosition + _radius).toFloat()
         )
-        val degree = level.toFloat() / MAX_LEVEL.toFloat() * 360
+        val degree = level.toFloat() / maxLevel.toFloat() * 360
         canvas.drawArc(rectF, 270f, degree, false, mPaint)
     }
 
     private fun drawCircle(canvas: Canvas, color: Int) {
         mPaint.color = color
         val bounds = bounds
-        val xpos = bounds.left + bounds.width() / 2
-        val ypos = bounds.bottom - bounds.height() / 2
-        canvas.drawCircle(xpos.toFloat(), ypos.toFloat(), _Radius.toFloat(), mPaint)
+        val xPosition = bounds.left + bounds.width() / 2
+        val yPosition = bounds.bottom - bounds.height() / 2
+        canvas.drawCircle(xPosition.toFloat(), yPosition.toFloat(), _radius.toFloat(), mPaint)
     }
 }
