@@ -16,14 +16,28 @@
 
 package net.mobiquity.core.di
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
+import dagger.multibindings.IntoMap
 import net.mobiquity.core.platform.ViewModelFactory
+import net.mobiquity.feature.home.HomeViewModel
+import net.mobiquity.main.MainViewModel
 
 @Suppress("unused")
 @Module
 abstract class ViewModelModule {
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
 }

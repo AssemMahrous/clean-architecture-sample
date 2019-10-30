@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentManager
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
+import net.mobiquity.core.MobiquityApp
 
 /**
  * Helper class to automatically inject fragments if they implement [Injectable].
@@ -32,7 +33,7 @@ import dagger.android.support.HasSupportFragmentInjector
 object AppInjector {
     lateinit var appComponent: AppComponent
 
-    fun init(application: Application) {
+    fun init(application: MobiquityApp) {
         if (!AppInjector::appComponent.isInitialized)
             appComponent = DaggerAppComponent.builder()
                 .application(application)

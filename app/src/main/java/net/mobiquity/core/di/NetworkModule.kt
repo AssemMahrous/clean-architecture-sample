@@ -46,7 +46,6 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRxErrorHandlingCallAdapterFactory(): RxErrorHandlingCallAdapterFactory {
-        return RxErrorHandlingCallAdapterFactory.create()
-    }
+    fun provideRxErrorHandlingCallAdapterFactory(): RxErrorHandlingCallAdapterFactory =
+        RxErrorHandlingCallAdapterFactory.create()
 }

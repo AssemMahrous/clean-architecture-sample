@@ -24,13 +24,9 @@ abstract class BaseActivity<MBaseViewModel : BaseViewModel>
 
     private lateinit var viewModel: MBaseViewModel
 
-    private lateinit var viewModelFactory: ViewModelFactory
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getBaseViewModel()
-        viewModelFactory = getBaseViewModelFactory()
-
         viewModel.status.observe(this, EventObserver {
             when (it) {
                 is Status.Error -> {
@@ -53,10 +49,6 @@ abstract class BaseActivity<MBaseViewModel : BaseViewModel>
         showAlert(errorMessage, R.color.colorAccent)
     }
 
-    open fun showSuccess(message: String) {
-        showAlert(message, R.color.success_message_color)
-    }
-
     open fun hideLoading() {
         val progressBar = findViewById<ProgressBar>(R.id.progress_circular)
         if (progressBar != null)
@@ -70,8 +62,6 @@ abstract class BaseActivity<MBaseViewModel : BaseViewModel>
     }
 
     abstract fun getBaseViewModel(): MBaseViewModel
-
-    abstract fun getBaseViewModelFactory(): ViewModelFactory
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 

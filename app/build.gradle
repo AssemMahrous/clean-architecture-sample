@@ -28,12 +28,12 @@ android {
     productFlavors {
         development {
             flavorDimensions 'default'
-            buildConfigField 'String', 'SERVER_URL', '"http://mobcategories.s3-website-eu-west-1.amazonaws.com/"'
+            buildConfigField 'String', 'SERVER_URL', '"http://mobcategories.s3-website-eu-west-1.amazonaws.com"'
             versionNameSuffix ".development"
         }
         production {
             dimension = 'default'
-            buildConfigField 'String', 'SERVER_URL', '"http://mobcategories.s3-website-eu-west-1.amazonaws.com/"'
+            buildConfigField 'String', 'SERVER_URL', '"http://mobcategories.s3-website-eu-west-1.amazonaws.com"'
         }
     }
 

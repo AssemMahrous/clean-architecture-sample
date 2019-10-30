@@ -78,6 +78,7 @@ private constructor() { //Utility classes should not be instantiated
      * @param titleId Title String Resource
      * @return This CustomAlerter
      */
+    @Suppress("UNUSED")
     fun setTitle(@StringRes titleId: Int): CustomAlerter {
         if (alert != null) {
             alert!!.setTitle(titleId)
@@ -120,6 +121,7 @@ private constructor() { //Utility classes should not be instantiated
      * @param textId Text String Resource
      * @return This CustomAlerter
      */
+    @Suppress("UNUSED")
     fun setText(@StringRes textId: Int): CustomAlerter {
         if (alert != null) {
             alert!!.setText(textId)
@@ -134,6 +136,7 @@ private constructor() { //Utility classes should not be instantiated
      * @param text String of Alert Text
      * @return This CustomAlerter
      */
+    @Suppress("UNUSED")
     fun setText(text: String): CustomAlerter {
         if (alert != null) {
             alert!!.setText(text)
@@ -159,6 +162,7 @@ private constructor() { //Utility classes should not be instantiated
      * @param drawable Drawable
      * @return This CustomAlerter
      */
+    @Suppress("UNUSED")
     fun setBackgroundDrawable(drawable: Drawable): CustomAlerter {
         if (alert != null) {
             alert!!.setAlertBackgroundDrawable(drawable)
@@ -173,6 +177,7 @@ private constructor() { //Utility classes should not be instantiated
      * @param drawableResId Drawable Resource Id
      * @return This CustomAlerter
      */
+    @Suppress("UNUSED")
     fun setBackgroundResource(@DrawableRes drawableResId: Int): CustomAlerter {
         if (alert != null) {
             alert!!.setAlertBackgroundResource(drawableResId)
@@ -187,6 +192,7 @@ private constructor() { //Utility classes should not be instantiated
      * @param iconId The Drawable's Resource Idw
      * @return This CustomAlerter
      */
+    @Suppress("UNUSED")
     fun setIcon(@DrawableRes iconId: Int): CustomAlerter {
         if (alert != null) {
             alert!!.setIcon(iconId)
@@ -201,6 +207,7 @@ private constructor() { //Utility classes should not be instantiated
      * @param bitmap The Bitmap object to use for the icon.
      * @return This CustomAlerter
      */
+    @Suppress("UNUSED")
     fun setIcon(bitmap: Bitmap): CustomAlerter {
         if (alert != null) {
             alert!!.setIcon(bitmap)
@@ -255,6 +262,7 @@ private constructor() { //Utility classes should not be instantiated
      * @param pulse True if the icon should pulse
      * @return This CustomAlerter
      */
+    @Suppress("UNUSED")
     fun enableIconPulse(pulse: Boolean): CustomAlerter {
         if (alert != null) {
             alert!!.pulseIcon(pulse)
@@ -268,6 +276,7 @@ private constructor() { //Utility classes should not be instantiated
      * @param showIcon True to show the icon, false otherwise
      * @return This CustomAlerter
      */
+    @Suppress("UNUSED")
     fun showIcon(showIcon: Boolean): CustomAlerter {
         if (alert != null) {
             alert!!.showIcon(showIcon)
@@ -281,6 +290,7 @@ private constructor() { //Utility classes should not be instantiated
      * @param infiniteDuration True if the duration of the alert is infinite
      * @return This CustomAlerter
      */
+    @Suppress("UNUSED")
     fun enableInfiniteDuration(infiniteDuration: Boolean): CustomAlerter {
         if (alert != null) {
             alert!!.setEnableInfiniteDuration(infiniteDuration)
@@ -294,6 +304,7 @@ private constructor() { //Utility classes should not be instantiated
      * @param listener OnShowAlertListener of Alert
      * @return This CustomAlerter
      */
+    @Suppress("UNUSED")
     fun setOnShowListener(listener: OnShowAlertListener): CustomAlerter {
         if (alert != null) {
             alert!!.setOnShowListener(listener)
@@ -320,6 +331,7 @@ private constructor() { //Utility classes should not be instantiated
      * @param enable True to enable, False to disable
      * @return This CustomAlerter
      */
+    @Suppress("UNUSED")
     fun enableVibration(enable: Boolean): CustomAlerter {
         if (alert != null) {
             alert!!.setVibrationEnabled(enable)
@@ -333,6 +345,7 @@ private constructor() { //Utility classes should not be instantiated
      *
      * @return This CustomAlerter
      */
+    @Suppress("UNUSED")
     fun disableOutsideTouch(): CustomAlerter {
         if (alert != null) {
             alert!!.disableOutsideTouch()
@@ -364,7 +377,6 @@ private constructor() { //Utility classes should not be instantiated
          * @return This CustomAlerter
          */
         fun create(activity: Activity): CustomAlerter {
-            requireNotNull(activity) { "Activity cannot be null!" }
 
             val alerter = CustomAlerter()
 
@@ -381,10 +393,6 @@ private constructor() { //Utility classes should not be instantiated
          * Cleans up the currently showing alert view, if one is present
          */
         private fun clearCurrent(activity: Activity) {
-            if (activity == null) {
-                return
-            }
-
             try {
                 val decorView = activity.window.decorView as ViewGroup
 

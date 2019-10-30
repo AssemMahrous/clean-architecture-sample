@@ -16,23 +16,26 @@
 
 package net.mobiquity.core.di
 
-import android.app.Application
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
+import net.mobiquity.core.MobiquityApp
 import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [AndroidInjectionModule::class, AppModule::class,
+    modules = [
+        AndroidInjectionModule::class,
+        AppModule::class,
         Modules::class]
 )
+
 interface AppComponent {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun application(application: Application): Builder
+        fun application(application: MobiquityApp): Builder
 
         @BindsInstance
         fun context(context: Context): Builder
@@ -40,6 +43,6 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(application: Application)
+    fun inject(application: MobiquityApp)
 
 }

@@ -17,7 +17,7 @@ fun isDevelopmentDebug(block: () -> Unit) {
     }
 }
 
-
+@Suppress("UNUSED")
 fun SimpleDraweeView.loadImage(imgUrl: String) {
     val uri = Uri.parse(imgUrl)
     this.hierarchy.setProgressBarImage(CircleProgressDrawable())
@@ -33,7 +33,7 @@ fun SimpleDraweeView.loadImage(imgUrl: String) {
 }
 
 fun Activity?.showAlert(text: String, color: Int) {
-    val alerter = this.showAlert(
+    this.showAlert(
         text,
         3000,
         color,

@@ -12,14 +12,15 @@ import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import net.mobiquity.R
 import net.mobiquity.core.networkError.RetrofitException
-import net.mobiquity.core.utils.ApplicationException
-import net.mobiquity.core.utils.Event
-import net.mobiquity.core.utils.Status
-import net.mobiquity.core.utils.isDevelopmentDebug
+import net.mobiquity.core.utils.*
 import timber.log.Timber
 import java.net.HttpURLConnection
+import javax.inject.Inject
 
 abstract class BaseViewModel : ViewModel() {
+    @Inject
+    lateinit var connectivityUtils: IConnectivityUtils
+
     private val compositeDisposable = CompositeDisposable()
     private val _status = MutableLiveData<Status<*>>()
     val status: LiveData<Event<Status<*>>> = Transformations
@@ -29,27 +30,45 @@ abstract class BaseViewModel : ViewModel() {
         when (exception) {
             is RetrofitException -> when (exception.getKind()) {
                 RetrofitException.Kind.NETWORK ->
-                    _status.postValue(Status.Error(errorRes = R.string.network_error_no_connection))
+                    _status.postValue(
+                        Status.Error(
+                            ErrorType.NoInternetConnection,
+                            errorRes = R.string.network_error_no_connection
+                        )
+                    )
 
                 RetrofitException.Kind.HTTP -> {
                     exception.getResponse()?.let {
                         when {
                             it.code() == HttpURLConnection.HTTP_NOT_FOUND -> _status.postValue(
-                                Status.Error(errorRes = R.string.network_error_not_found)
+                                Status.Error(
+                                    ErrorType.NetworkError,
+                                    errorRes = R.string.network_error_not_found
+                                )
                             )
                             else -> isDevelopmentDebug { TODO("wrong path") }
                         }
                     } ?: run {
-                        _status.postValue(Status.Error(exception.message))
+                        _status.postValue(Status.Error(ErrorType.NetworkError, exception.message))
                     }
                 }
 
                 RetrofitException.Kind.UNEXPECTED ->
-                    _status.postValue(Status.Error(errorRes = R.string.generic_error))
+                    _status.postValue(
+                        Status.Error(
+                            ErrorType.Unexpected,
+                            errorRes = R.string.generic_error
+                        )
+                    )
             }
             is ApplicationException -> _status.postValue(exception.error)
             else -> {
-                // todo
+                _status.postValue(
+                    Status.Error(
+                        ErrorType.Unexpected,
+                        errorRes = R.string.generic_error
+                    )
+                )
             }
         }
     }
@@ -62,6 +81,19 @@ abstract class BaseViewModel : ViewModel() {
         observeOnMainThread: Boolean = true,
         showLoading: Boolean = true
     ) {
+        if (connectivityUtils.isNetworkConnected.not()) {
+            handleApplicationError(
+                RetrofitException(
+                    null,
+                    null,
+                    null,
+                    RetrofitException.Kind.NETWORK,
+                    null,
+                    null
+                )
+            )
+            return
+        }
         val observerScheduler =
             if (observeOnMainThread) AndroidSchedulers.mainThread()
             else subscribeScheduler

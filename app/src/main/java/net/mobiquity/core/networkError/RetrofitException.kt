@@ -38,6 +38,7 @@ class RetrofitException(
     }
 
     /** The request URL which produced the error. */
+    @Suppress("UNUSED")
     fun getUrl() = _url
 
     /** Response object containing status code, containers, body, etc. */
@@ -47,6 +48,7 @@ class RetrofitException(
     fun getKind() = _kind
 
     /** The Retrofit this request was executed on */
+    @Suppress("UNUSED")
     fun getRetrofit() = _retrofit
 
 
@@ -55,6 +57,7 @@ class RetrofitException(
      * response.
      * @throws IOException if unable to convert the body to the specified `type`.
      */
+    @Suppress("UNUSED")
     @Throws(IOException::class)
     fun <T> getErrorBodyAs(type: Class<T>): T? {
         if (_response?.errorBody() == null || _retrofit == null) {

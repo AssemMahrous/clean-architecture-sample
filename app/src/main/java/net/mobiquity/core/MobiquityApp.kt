@@ -21,6 +21,8 @@ class MobiquityApp : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
+        AppInjector.init(this)
+
         if (BuildConfig.DEBUG) {
             Logger.addLogAdapter(AndroidLogAdapter())
 
@@ -34,7 +36,5 @@ class MobiquityApp : Application(), HasActivityInjector {
         }
 
         Fresco.initialize(this)
-
-        AppInjector.init(this)
     }
 }

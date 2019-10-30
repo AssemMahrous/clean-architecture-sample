@@ -16,9 +16,23 @@
 
 package net.mobiquity.core.di
 
+import dagger.Binds
 import dagger.Module
+import net.mobiquity.modules.category.data.CategoryRepository
+import net.mobiquity.modules.category.data.CategoryRepositoryInterface
+import net.mobiquity.modules.product.data.ProductRepository
+import net.mobiquity.modules.product.data.ProductRepositoryInterface
+import javax.inject.Singleton
 
 
 @Suppress("unused")
 @Module
-abstract class RepositoriesModule
+abstract class RepositoriesModule {
+    @Binds
+    @Singleton
+    abstract fun bindCategoryRepository(categoryRepository: CategoryRepository): CategoryRepositoryInterface
+
+    @Binds
+    @Singleton
+    abstract fun bindProductRepository(productRepository: ProductRepository): ProductRepositoryInterface
+}
