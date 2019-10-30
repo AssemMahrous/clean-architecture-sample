@@ -18,10 +18,7 @@ package net.mobiquity.core.di
 
 import android.app.Activity
 import android.app.Application
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -50,11 +47,6 @@ object AppInjector {
             }
 
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    activity.window.decorView.systemUiVisibility =
-                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                    activity.window.statusBarColor = Color.WHITE
-                }
                 handleActivity(activity)
             }
 
