@@ -18,14 +18,14 @@ fun isDevelopmentDebug(block: () -> Unit) {
 }
 
 @Suppress("UNUSED")
-fun SimpleDraweeView.loadImage(imgUrl: String) {
+fun loadImage(imgUrl: String, imageView: SimpleDraweeView) {
     val uri = Uri.parse(imgUrl)
-    this.hierarchy.setProgressBarImage(CircleProgressDrawable())
+    imageView.hierarchy.setProgressBarImage(CircleProgressDrawable())
     val imageRequest = ImageRequestBuilder
         .newBuilderWithSource(uri)
         .build()
-    this.controller = Fresco.newDraweeControllerBuilder()
-        .setOldController(this.controller)
+    imageView.controller = Fresco.newDraweeControllerBuilder()
+        .setOldController(imageView.controller)
         .setImageRequest(imageRequest)
         .setAutoPlayAnimations(true)
         .build()

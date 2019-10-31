@@ -38,28 +38,30 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
         no_internet_connection.setOnClickListener {
             it.visibility = View.GONE
-            viewModel.getCategories()
+            getCategories()
         }
 
+        getCategories()
+    }
+
+    private fun getCategories() {
         viewModel.getCategories()
     }
 
+    private val adapter = ProductsAdapter { product: ProductView ->
+        //todo go to product detail
+    }
+
     override fun showLoading() {
-        textViewProducts.visibility = View.GONE
         super.showLoading()
     }
 
     override fun hideLoading() {
         super.hideLoading()
-        textViewProducts.visibility = View.VISIBLE
     }
 
     private fun updateList(list: List<ProductView>) {
-        // todo
-        textViewProducts.text = ""
-        list.forEach {
-            textViewProducts.text = "${textViewProducts.text}$it\n\n"
-        }
+        adapter.submitList(list)
     }
 
     private fun initView(list: List<CategoryView>) {
@@ -86,5 +88,6 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             }
         })
         list.firstOrNull()?.let { viewModel.getProducts(it.id) }
+        recycler_view_products.adapter = adapter
     }
 }
