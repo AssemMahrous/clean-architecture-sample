@@ -1,6 +1,7 @@
 package net.mobiquity.modules.product
 
 import net.mobiquity.BuildConfig
+import net.mobiquity.core.utils.Event
 import net.mobiquity.modules.product.domain.Product
 import net.mobiquity.modules.product.entities.ProductRemoteEntity
 import net.mobiquity.modules.product.entities.ProductView
@@ -19,8 +20,8 @@ object Mapper {
         productRemoteEntity.salePrice.currency
     )
 
-    fun mapToProductViewList(list: List<Product>): List<ProductView> {
-        return list.map { mapToProductView(it) }
+    fun mapToProductViewList(list: List<Product>): Event<List<ProductView>> {
+        return Event (list.map { mapToProductView(it) })
     }
 
     private fun mapToProductView(product: Product): ProductView =

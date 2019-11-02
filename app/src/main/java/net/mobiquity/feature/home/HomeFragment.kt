@@ -9,6 +9,7 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.home_fragment.*
 import net.mobiquity.R
 import net.mobiquity.core.platform.BaseFragment
+import net.mobiquity.core.utils.EventObserver
 import net.mobiquity.modules.category.entities.CategoryView
 import net.mobiquity.modules.product.entities.ProductView
 import javax.inject.Inject
@@ -28,11 +29,11 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.categories.observe(this, Observer {
+        viewModel.categories.observe(this, EventObserver {
             initView(it)
         })
 
-        viewModel.products.observe(this, Observer {
+        viewModel.products.observe(this, EventObserver {
             updateList(it)
         })
 

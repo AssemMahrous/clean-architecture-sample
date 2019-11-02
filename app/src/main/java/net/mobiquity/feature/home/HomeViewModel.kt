@@ -3,6 +3,7 @@ package net.mobiquity.feature.home
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.functions.Consumer
 import net.mobiquity.core.platform.BaseViewModel
+import net.mobiquity.core.utils.Event
 import net.mobiquity.modules.category.entities.CategoryView
 import net.mobiquity.modules.category.usecase.GetCategoriesListUseCase
 import net.mobiquity.modules.product.entities.ProductView
@@ -16,8 +17,8 @@ class HomeViewModel @Inject constructor(
     val getProductListByCategoryIdUseCase: GetProductListByCategoryIdUseCase
 ) : BaseViewModel() {
 
-    val categories = MutableLiveData<List<CategoryView>>()
-    val products = MutableLiveData<List<ProductView>>()
+    val categories = MutableLiveData<Event<List<CategoryView>>>()
+    val products = MutableLiveData<Event<List<ProductView>>>()
 
     fun getCategories() {
         singleNetworkCall(
