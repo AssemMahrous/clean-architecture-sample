@@ -7,6 +7,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.tapadoo.alerter.OnHideAlertListener
 import net.mobiquity.BuildConfig
+import net.mobiquity.R
 import net.mobiquity.core.utils.widgets.CustomAlerter
 
 fun isDevelopmentDebug(block: () -> Unit) {
@@ -15,20 +16,9 @@ fun isDevelopmentDebug(block: () -> Unit) {
     }
 }
 
-@Suppress("UNUSED")
 fun loadImage(imgUrl: String, imageView: ImageView) {
-//    val uri = Uri.parse(imgUrl)
-//    imageView.hierarchy.setProgressBarImage(CircleProgressDrawable())
-//    val imageRequest = ImageRequestBuilder
-//        .newBuilderWithSource(uri)
-//        .build()
-//    imageView.controller = Fresco.newDraweeControllerBuilder()
-//        .setOldController(imageView.controller)
-//        .setImageRequest(imageRequest)
-//        .setAutoPlayAnimations(true)
-//        .build()
-    Glide.with(imageView.context).load(imgUrl).into(imageView)
-
+    Glide.with(imageView.context).load(imgUrl)
+        .error(R.drawable.placeholder_image).into(imageView)
 }
 
 fun Activity?.showAlert(text: String, color: Int) {
