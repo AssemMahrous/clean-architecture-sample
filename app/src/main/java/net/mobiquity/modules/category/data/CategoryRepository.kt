@@ -15,7 +15,7 @@ class CategoryRepository @Inject constructor(
     CategoryRepositoryInterface {
     override fun getCategories(): Single<List<Category>> {
         return remoteDataSource.apiRequests.getCategories()
-            .doOnSuccess(localDataSource::saveProducts)
+            .doOnSuccess { localDataSource.saveProducts(it) }
             .map { list -> list.map(Mapper::mapToCategory) }
     }
 }

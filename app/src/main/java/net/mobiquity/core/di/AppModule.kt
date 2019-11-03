@@ -4,6 +4,8 @@ import android.content.Context
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
+import net.mobiquity.core.data.LocalScheduler
+import net.mobiquity.core.data.LocalSchedulerInterface
 import net.mobiquity.core.data.local.LocalDataSource
 import net.mobiquity.core.data.local.LocalDataSourceImpl
 import net.mobiquity.core.data.remote.RemoteDataSource
@@ -38,5 +40,8 @@ class AppModule {
     @Provides
     fun provideConnectivityUtils(context: Context): IConnectivityUtils = ConnectivityUtils(context)
 
-
+    @Singleton
+    @Provides
+    fun provideLocalScheduler(): LocalSchedulerInterface =
+        LocalScheduler()
 }

@@ -6,11 +6,10 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import io.reactivex.Scheduler
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
 import net.mobiquity.R
+import net.mobiquity.core.data.LocalSchedulerInterface
 import net.mobiquity.core.networkError.RetrofitException
 import net.mobiquity.core.utils.*
 import timber.log.Timber
@@ -20,6 +19,8 @@ import javax.inject.Inject
 abstract class BaseViewModel : ViewModel() {
     @Inject
     lateinit var connectivityUtils: IConnectivityUtils
+    @Inject
+    lateinit var localScheduler: LocalSchedulerInterface
 
     private val compositeDisposable = CompositeDisposable()
     private val _status = MutableLiveData<Status<*>>()
@@ -77,7 +78,7 @@ abstract class BaseViewModel : ViewModel() {
         single: Single<T>,
         success: Consumer<T>,
         error: Consumer<Throwable> = Consumer { },
-        subscribeScheduler: Scheduler = Schedulers.io(),
+        subscribeScheduler: Scheduler = localScheduler.io(),
         observeOnMainThread: Boolean = true,
         showLoading: Boolean = true
     ) {
@@ -95,7 +96,7 @@ abstract class BaseViewModel : ViewModel() {
             return
         }
         val observerScheduler =
-            if (observeOnMainThread) AndroidSchedulers.mainThread()
+            if (observeOnMainThread) localScheduler.main()
             else subscribeScheduler
 
         compositeDisposable.add(
@@ -133,3 +134,4 @@ abstract class BaseViewModel : ViewModel() {
         super.onCleared()
     }
 }
+

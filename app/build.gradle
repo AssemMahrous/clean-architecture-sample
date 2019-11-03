@@ -100,7 +100,7 @@ dependencies {
 
     // Fresco Image loading
     implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
 
     // utils
     implementation 'com.tapadoo.android:alerter:2.0.0'
@@ -113,7 +113,5 @@ dependencies {
     testImplementation "androidx.test.ext:junit-ktx:1.1.1"
     testImplementation "androidx.test:core-ktx:1.2.0"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
-    testImplementation "org.robolectric:robolectric:4.3.1"
     testImplementation 'org.mockito:mockito-core:3.0.0'
-
 }
