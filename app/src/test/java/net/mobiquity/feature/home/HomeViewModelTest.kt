@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.mobiquity.MyTestApplication
+import net.mobiquity.core.platform.BaseViewModel
 import net.mobiquity.getOrAwaitValue
 import net.mobiquity.modules.category.usecase.GetCategoriesListUseCase
 import net.mobiquity.modules.product.usecase.GetProductListByCategoryIdUseCase
@@ -13,14 +14,13 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito
-import org.robolectric.annotation.Config
 import org.mockito.Mockito.mock
+import org.robolectric.annotation.Config
 
 
 @Config(sdk = [Build.VERSION_CODES.O_MR1], application = MyTestApplication::class)
 @RunWith(AndroidJUnit4::class)
-class HomeViewModelTest {
+class HomeViewModelTest : BaseViewModel() {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
     // Subject under test
