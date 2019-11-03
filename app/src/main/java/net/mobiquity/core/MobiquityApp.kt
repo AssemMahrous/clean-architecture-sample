@@ -2,7 +2,6 @@ package net.mobiquity.core
 
 import android.app.Activity
 import android.app.Application
-import com.facebook.drawee.backends.pipeline.Fresco
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import dagger.android.DispatchingAndroidInjector
@@ -34,7 +33,5 @@ class MobiquityApp : Application(), HasActivityInjector {
         } else {
             Timber.plant(ReleaseTree())
         }
-
-        Fresco.initialize(this)
     }
 }

@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import android.widget.ImageView
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.home_fragment.*
 import net.mobiquity.R
@@ -49,16 +52,18 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         viewModel.getCategories()
     }
 
-    private val adapter = ProductsAdapter { product: ProductView ->
-        //todo go to product detail
-    }
-
-    override fun showLoading() {
-        super.showLoading()
-    }
-
-    override fun hideLoading() {
-        super.hideLoading()
+    private val adapter = ProductsAdapter { product: ProductView, imageView: ImageView ->
+        val extras = FragmentNavigatorExtras(
+            imageView to "imageView"
+        )
+        val bundle =
+            bundleOf("name" to product.name, "price" to product.price, "image" to product.imageUrl)
+        findNavController().navigate(
+            R.id.action_homeFragment_to_detailFragment,
+            bundle,
+            null,
+            extras
+        )
     }
 
     private fun updateList(list: List<ProductView>) {

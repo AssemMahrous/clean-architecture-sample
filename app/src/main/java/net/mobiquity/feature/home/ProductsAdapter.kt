@@ -3,6 +3,7 @@ package net.mobiquity.feature.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,7 @@ import net.mobiquity.R
 import net.mobiquity.core.utils.loadImage
 import net.mobiquity.modules.product.entities.ProductView
 
-class ProductsAdapter(val listener: (product: ProductView) -> Unit) :
+class ProductsAdapter(val listener: (product: ProductView, imageView: ImageView) -> Unit) :
     ListAdapter<ProductView, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -28,9 +29,9 @@ class ProductsAdapter(val listener: (product: ProductView) -> Unit) :
     class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(
             item: ProductView,
-            listener: (item: ProductView) -> Unit
+            listener: (item: ProductView, imageView: ImageView) -> Unit
         ) = with(itemView) {
-            itemView.setOnClickListener { listener(item) }
+            itemView.setOnClickListener { listener(item, image_product) }
             item.imageUrl?.let { loadImage(it, image_product) }
             text_view_product_name.text = item.name
         }

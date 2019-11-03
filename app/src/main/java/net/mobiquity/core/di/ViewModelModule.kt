@@ -22,6 +22,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import net.mobiquity.core.platform.ViewModelFactory
+import net.mobiquity.feature.detail.DetailViewModel
 import net.mobiquity.feature.home.HomeViewModel
 import net.mobiquity.main.MainViewModel
 
@@ -40,4 +41,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailViewModel::class)
+    abstract fun bindDetailViewModel(detailViewModel: DetailViewModel): ViewModel
 }

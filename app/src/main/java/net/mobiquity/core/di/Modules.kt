@@ -2,6 +2,7 @@ package net.mobiquity.core.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import net.mobiquity.feature.detail.DetailFragment
 import net.mobiquity.feature.home.HomeFragment
 import net.mobiquity.main.MainActivity
 
@@ -13,4 +14,7 @@ abstract class Modules {
 
     @ContributesAndroidInjector
     abstract fun contributeHomeFragment(): HomeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeDetailFragment(): DetailFragment
 }

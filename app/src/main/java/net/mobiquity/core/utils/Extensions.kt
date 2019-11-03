@@ -1,12 +1,10 @@
 package net.mobiquity.core.utils
 
 import android.app.Activity
-import android.net.Uri
 import android.view.Gravity
 import android.view.View
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.drawee.view.SimpleDraweeView
-import com.facebook.imagepipeline.request.ImageRequestBuilder
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.tapadoo.alerter.OnHideAlertListener
 import net.mobiquity.BuildConfig
 import net.mobiquity.core.utils.widgets.CustomAlerter
@@ -18,17 +16,18 @@ fun isDevelopmentDebug(block: () -> Unit) {
 }
 
 @Suppress("UNUSED")
-fun loadImage(imgUrl: String, imageView: SimpleDraweeView) {
-    val uri = Uri.parse(imgUrl)
-    imageView.hierarchy.setProgressBarImage(CircleProgressDrawable())
-    val imageRequest = ImageRequestBuilder
-        .newBuilderWithSource(uri)
-        .build()
-    imageView.controller = Fresco.newDraweeControllerBuilder()
-        .setOldController(imageView.controller)
-        .setImageRequest(imageRequest)
-        .setAutoPlayAnimations(true)
-        .build()
+fun loadImage(imgUrl: String, imageView: ImageView) {
+//    val uri = Uri.parse(imgUrl)
+//    imageView.hierarchy.setProgressBarImage(CircleProgressDrawable())
+//    val imageRequest = ImageRequestBuilder
+//        .newBuilderWithSource(uri)
+//        .build()
+//    imageView.controller = Fresco.newDraweeControllerBuilder()
+//        .setOldController(imageView.controller)
+//        .setImageRequest(imageRequest)
+//        .setAutoPlayAnimations(true)
+//        .build()
+    Glide.with(imageView.context).load(imgUrl).into(imageView)
 
 }
 
